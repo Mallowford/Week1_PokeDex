@@ -7,3 +7,9 @@
 [submodule "external/SDL_image"]
 	path = external/SDL_image
 	url = https://github.com/libsdl-org/SDL_image.git
+[submodule "external/folly"]
+	path = external/folly
+	url = https://github.com/facebook/folly.git
+[submodule "external/json"]
+	path = external/json
+	url = https://github.com/nlohmann/json.git
