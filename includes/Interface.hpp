@@ -11,6 +11,9 @@ class Interface {
     bool running;
     Uint64 FLAGS;
     SDL_Event event;
+    void keyboardHelper();
+    Parser* ParseManager;
+    std::vector<SDL_Texture*> textures;
   public:
     Interface();
     ~Interface();

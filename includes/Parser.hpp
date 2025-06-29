@@ -7,6 +7,7 @@
 
 class defaultNode {
   public:
+    defaultNode() = default;
     unsigned int id;
     std::string name;
     std::string description;
@@ -14,14 +15,15 @@ class defaultNode {
 
 class pokemonNode : public defaultNode {
   public:
-    uint16_t bst;
+    pokemonNode() = default;
+    int bst;
     // Individual Stats
-    uint8_t atk;
-    uint8_t def;
-    uint8_t hp;
-    uint8_t spAtk;
-    uint8_t spDef;
-    uint8_t speed;
+    int atk;
+    int def;
+    int hp;
+    int spAtk;
+    int spDef;
+    int speed;
     // Pokemon
     bool isShiny = false;
     std::string spriteFront;
@@ -40,9 +42,14 @@ class abilityNode : public defaultNode {
 
 class Parser {
   private:
-    pokemonNode parserHelper(...);
+    pokemonNode* parserHelper(const std::string& pokemon);
+    std::vector<std::string> filesToRemove;
+    std::vector<pokemonNode*> storedNodes;
   public:
-    pokemonNode ParsePokemon(unsigned int id);
-    pokemonNode ParsePokemon(const std::string& name);
+    Parser();
+    ~Parser();
+    pokemonNode* ParsePokemon(unsigned int id);
+    pokemonNode* ParsePokemon(const std::string& name);
+    std::string easyImage(pokemonNode* data);
     // abilityNode ParseAbility(const std::string& name);
 };

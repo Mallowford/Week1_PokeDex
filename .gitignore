@@ -4,4 +4,4 @@ lib/
 CMakeFiles/
 *.cmake
 CMakeCache.txt
-*.png
+temp/*.png

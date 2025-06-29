@@ -17,4 +17,7 @@ Abilities and Item descriptions and sprites
 For the sake of simplicity and this being a solo project,
 I am nulling Google Tests and Mocks.
 
+# Graphics:
+[Icon](https://www.deviantart.com/maratuna/art/Pokeball-Graphic-153980551)
+
 ### This is week 1 of the year-long project goal

@@ -11,6 +11,10 @@ add_subdirectory(external/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(external/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(external/json EXCLUDE_FROM_ALL)
 
-add_executable(pokedexapp WIN32 src/main.cpp)
+add_executable(pokedexapp WIN32
+  src/main.cpp
+  src/Parser.cpp
+  src/Interface.cpp
+)
 
 target_link_libraries(pokedexapp PRIVATE SDL3::SDL3 SDL3_image::SDL3_image libcurl nlohmann_json::nlohmann_json)
