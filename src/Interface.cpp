@@ -1,6 +1,7 @@
 #include "../includes/Interface.hpp"
 pokemonNode* data;
 SDL_Texture* spriteTexture;
+TTF_Font* gFont = nullptr;
 
 Interface::Interface() {
   FLAGS = SDL_INIT_VIDEO;
@@ -13,7 +14,7 @@ Interface::~Interface() {
   SDL_Quit();
 };
 
-void Interface::init(const std::string& title, int width, int height) {
+bool Interface::init(const std::string& title, int width, int height) {
   if (SDL_Init(FLAGS)) {
     this->window = SDL_CreateWindow(title.c_str(), width, height, FLAGS);
 
@@ -27,6 +28,7 @@ void Interface::init(const std::string& title, int width, int height) {
     };
 
     SDL_DestroySurface(iconSurf);
+    TTF_Init();
     running = true;
   }
   else {
@@ -34,12 +36,20 @@ void Interface::init(const std::string& title, int width, int height) {
   };
 
   ParseManager = new Parser();
-  data = ParseManager->ParsePokemon("kyogre");
+  data = ParseManager->ParsePokemon("lucario");
   // SDL_FRect src;
   // SDL_FRect dest;
   std::string imagePath = ParseManager->easyImage(data);
   SDL_Surface* pokemonSprite = IMG_Load(imagePath.c_str());
   spriteTexture = SDL_CreateTextureFromSurface(ren, pokemonSprite);
+  gFont = TTF_OpenFont("assets/Inter_24pt-Bold.ttf", 24);
+  if (!gFont) {
+    fprintf(stderr, "TTF_OpenFont error: %s\n", SDL_GetError());
+    return false;
+  };
+  buttons.emplace_back(100, 100, 200, 50, "Click Me", [](){ std::cout << "Button clicked!\n"; });
+
+  return true;
 };
 
 void Interface::update() {
@@ -47,6 +57,9 @@ void Interface::update() {
 void Interface::render() {
   SDL_RenderClear(ren);
   SDL_RenderTexture(ren, spriteTexture, NULL, NULL);
+  for (auto& btn : buttons) {
+    btn.render(ren);
+  };
   SDL_RenderPresent(ren);
 };
 void Interface::handleEvents() {
@@ -61,6 +74,9 @@ void Interface::handleEvents() {
         break;
       default:
         break;
+    };
+    for (auto& btn : buttons) {
+      btn.handleEvent(event);
     };
   };
 

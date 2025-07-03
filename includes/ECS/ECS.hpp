@@ -16,10 +16,12 @@ class ECS {
     Entity createEntity() {
       return nextEntityID++;
     };
+    
     template<typename Component>
     void addComponent(Entity e, Component c) {
       componentStorage[typeid(Component)][e] = c;
     };
+    
     template<typename Component>
     bool hasComponent(Entity e) {
       auto itr = componentStorage.find(typeid(Component));
@@ -28,13 +30,14 @@ class ECS {
       };
       return itr->second.count(e) > 0;
     };
+
     template<typename Component>
     Component* getComponent(Entity entity) {
-      auto itr = componentStores.find(typeid(Component));
+      auto itr = componentStorage.find(typeid(Component));
       if (itr == componentStorage.end()) {
         return nullptr;
       };
-      auto itr2 = itr->second.find(e);
+      auto itr2 = itr->second.find(entity);
       if (itr2 == itr->second.end()) {
         return nullptr;
       };

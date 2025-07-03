@@ -13,7 +13,12 @@ int main() {
   int frameTime;
   
   Interface* mainInterface = new Interface();
-  mainInterface->init(TITLE, WIDTH, HEIGHT);
+  
+  if(!mainInterface->init(TITLE, WIDTH, HEIGHT)) {
+    delete mainInterface;
+    throw std::runtime_error("Error Initializing");
+  };
+
 
   while (mainInterface->isRunning()) {
     frameStart = SDL_GetTicks();
