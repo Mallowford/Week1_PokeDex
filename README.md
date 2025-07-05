@@ -1,5 +1,6 @@
 # Pokedex Project
 ## This idea was taken from this list: https://github.com/florinpop17/weekly-projects
+## Project Over, ended as of 7/5/2025 2:53 AM PST (I could not work on it further due to fatigue and school)
 
 ## Description:
 This is a personal solo adventure part of a year-long project goal,
